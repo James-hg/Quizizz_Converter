@@ -41,7 +41,7 @@ class Txt_to_xlsx:
         self.stringbuilding()
 
         self.structurereplace()
-        # self.csv_to_excel()
+        self.csv_to_excel()
 
     def read_docx(self):
 
@@ -129,30 +129,33 @@ class Txt_to_xlsx:
         self.file1.SetContentString(self.store)
         self.file1['title'] = 'test.csv'
         self.file1.Upload()
+        print("helo")
 
     def csv_to_excel(self):
-        self.store.strip()
-        self.store_bytes = self.store.encode('utf-8')
-        parsed_data = [line.decode('utf-8').split('|')
-                       for line in self.store_bytes.strip().split(b'\n')]
+        # print("hellooo")
+        # self.store.strip()
+        # self.store_bytes = self.store.encode('utf-8')
+        # parsed_data = [line.decode('utf-8').split('|')
+        #                for line in self.store_bytes.strip().split(b'\n')]
 
-        # Create DataFrame from parsed data
-        df = pd.DataFrame(parsed_data, columns=['Question Text', 'Question Type', 'Option 1',
-                                                'Option 2', 'Option3', 'Option 4', 'Correct Answer', 'Time in seconds', 'Image link'])
+        # # Create DataFrame from parsed data
+        # df = pd.DataFrame(parsed_data, columns=['Question Text', 'Question Type', 'Option 1',
+        #                                         'Option 2', 'Option3', 'Option 4', 'Correct Answer', 'Time in seconds', 'Image link'])
 
-        # Create a BytesIO object to hold Excel file in memory
-        excel_buffer = BytesIO()
+        # # Create a BytesIO object to hold Excel file in memory
+        # excel_buffer = BytesIO()
 
-        # Write DataFrame to Excel file in memory
-        df.to_excel(excel_buffer, index=False)
+        # # Write DataFrame to Excel file in memory
+        # df.to_excel(excel_buffer, index=False)
 
-        # Upload Excel file to Google Drive
-        excel_buffer.seek(0)
-        excel_file = drive.CreateFile({'title': 'converted_excel_file.xlsx',
-                                      'mimeType': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})
+        # # Upload Excel file to Google Drive
+        # excel_buffer.seek(0)
+        excel_file = drive.CreateFile({'title': 'converted_excel_file',
+                                      'mimeType': 'application/vnd.google-apps.spreadsheet'})
 
-        excel_file.SetContentString(excel_buffer.getvalue())
+        excel_file.SetContentString(self.store)
         excel_file.Upload()
+        print("hello world")
 
         # Print the link to the uploaded file
         print("Uploaded Excel file link:", excel_file['alternateLink'])
