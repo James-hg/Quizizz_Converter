@@ -21,9 +21,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hehe</title>
+    <title>Hello Page</title>
   </head>
   <body>
-    <script src="drive.py"></script>
+    <button onclick="loadHello()">Load Hello</button>
+    <div id="helloContainer"></div>
+
+    <script>
+      function loadHello() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "drive.py", true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("helloContainer").innerHTML =
+              xhr.responseText;
+          }
+        };
+        xhr.send();
+      }
+    </script>
   </body>
 </html>

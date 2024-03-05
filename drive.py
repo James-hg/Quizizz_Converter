@@ -46,5 +46,7 @@
 # if file_id:
 #     txt_to_xlxs_instance = Txt_to_xlsx(file_id)
 
-for i in range(500):
-    print("Hello")
+print("Content-Type: text/plain")
+print()
+for i in range(50):
+    print("hello")
