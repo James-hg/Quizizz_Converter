@@ -15,7 +15,6 @@
     <script src="script.js"></script>
   </body>
 </html> -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -24,20 +23,11 @@
     <title>Hello Page</title>
   </head>
   <body>
-    <button onclick="loadHello()">Load Hello</button>
     <div id="helloContainer"></div>
 
     <script>
-      function loadHello() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "drive.py", true);
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById("helloContainer").innerHTML =
-              xhr.responseText;
-          }
-        };
-        xhr.send();
+      for (let i = 0; i < 50; i++) {
+        document.getElementById("helloContainer").innerHTML += "hello<br>";
       }
     </script>
   </body>
